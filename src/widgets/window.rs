@@ -2,11 +2,14 @@ use super::Widget;
 
 pub struct Window {
     title: String,
-    widgets: Vec<Box<dyn Widget>>
+    widgets: Vec<Box<dyn Widget>>,
 }
 impl Window {
     pub fn new(title: &str) -> Window {
-        Window {title: title.to_owned(), widgets: Vec::new()}
+        Window {
+            title: title.to_owned(),
+            widgets: Vec::new(),
+        }
     }
 
     pub fn add_widget(&mut self, widget: Box<dyn Widget>) {
@@ -16,7 +19,7 @@ impl Window {
     fn inner_width(&self) -> usize {
         std::cmp::max(
             self.title.chars().count(),
-            self.widgets.iter().map(|w| w.width()).max().unwrap_or(0)
+            self.widgets.iter().map(|w| w.width()).max().unwrap_or(0),
         )
     }
 }
@@ -26,7 +29,7 @@ impl Widget for Window {
         self.inner_width() + 4
     }
 
-    fn draw_into(&self, buffer: &mut dyn std::fmt::Write)  {
+    fn draw_into(&self, buffer: &mut dyn std::fmt::Write) {
         let mut inner: String = String::new();
         for widget in self.widgets.iter() {
             widget.draw_into(&mut inner);

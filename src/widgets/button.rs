@@ -1,12 +1,14 @@
 use super::{label::Label, Widget};
 
 pub struct Button {
-    label: Label
+    label: Label,
 }
 
 impl Button {
     pub(crate) fn new(label: &str) -> Button {
-        Button { label: Label::new(label) }
+        Button {
+            label: Label::new(label),
+        }
     }
 }
 
